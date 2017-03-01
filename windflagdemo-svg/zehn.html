@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function split(){
+    var str="translate(20,30)";
+    var re =/\d+/g;
+    var shu=str.match(re);
+    var xstr=shu[0];
+    var x=parseInt(xstr);
+    var ystr=shu[1];
+    var y=parseInt(ystr);
+    }
+    var str="rotate(2,763,45)";
+    var re=/rotate\S+/g;
+    var bool=re.test(str);
+    alert(bool);
+</script>
+</body>
+</html>

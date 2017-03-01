@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+
+
+        #title{
+            position: absolute;
+            top:40px;
+            left:1010px;
+            font-size: 30px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -ms-user-select: none;
+
+        }
+        .text1{
+
+            position: absolute;
+            left: 1010px;
+            top:120px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -ms-user-select: none;
+        }
+
+        #imgdiaplay{
+
+            position: absolute;
+            left: 1010px;
+            top:150px;
+            width:20px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -ms-user-select: none;
+        }
+
+        #decrease{
+
+            width:20px;
+            height:20px;
+        }
+
+
+        #increase{
+            float: right;
+            width:20px;
+            height:20px;
+        }
+        #angle{
+            position: absolute;
+            left: 1030px;
+            top:160px;
+            width:60px;
+            height: 18px;
+        }
+        .zoomcontent{
+            position: absolute;
+            left: 1010px;
+            top:210px;
+            width:120px;
+        }
+        #lat{
+            width:80px;
+
+        }
+        #lon{
+            width:80px;
+        }
+        #edit{
+            position: absolute;
+            left: 1010px;
+            top:350px;
+            width:80px;
+            height:30px;
+        }
+
+    </style>
+    <script src="js/myfunc.js"></script>
+    <script src="js/drag2.js"></script>
+</head>
+<body>
+
+<svg id="s" width="1000" height="700"  xmlns="http://www.w3.org/2000/svg"  onmousedown="mouseDown(evt)" onmousemove="move(evt)" onmouseup="endMove(evt)" onmouseout="endMove(evt)">
+    <image xlink:href="pic/back1.jpg" height="100%" width="100%" opacity="0.7"></image>
+    <!--绘制测试曲线,二次贝塞尔曲线-->
+   <!-- <path d="M100 600 Q300 250 500 350 T1000 200" stroke="#000000"  fill="none" style="stroke-width: 2px;"></path>-->
+    <!--绘制风向箭头-->
+    <marker id="arrow"
+            markerUnits="strokeWidth"
+            markerWidth="12"
+            markerHeight="12"
+            viewBox="0 0 12 12"
+            refX="6"
+            refY="6"
+            orient="auto">
+        <path d="M2,2 L10,6 L2,10 L6,6 L2,2" style="fill: #000000;" />
+    </marker>
+
+    <line  id="windline1"  x1="810" y1="80" x2="810" y2="180"  stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+    <line  id="windline2"  x1="820" y1="80" x2="820" y2="180"  stroke="black"  stroke-width="2" marker-end="url(#arrow)"/>
+    <line  id="windline3"  x1="830" y1="80" x2="830" y2="180" stroke="black"  stroke-width="2" marker-end="url(#arrow)"/>
+    <line  id="windline4"  display="none" x1="810" y1="500" x2="810" y2="600"  stroke="black"  stroke-width="2" marker-end="url(#arrow)"/>
+    <line  id="windline5"  display="none" x1="820" y1="500" x2="820" y2="600"  stroke="black"  stroke-width="2" marker-end="url(#arrow)"/>
+    <line  id="windline6"  display="none" x1="830" y1="500" x2="830" y2="600"  stroke="black"  stroke-width="2" marker-end="url(#arrow)"/>
+    <!--绘制风向箭头结束-->
+    <!--绘制站点符号-->
+
+    <!--<image xlink:href="pic/increase.png" x="50" y="500" height="50px" width="50px" transform="rotate(45,50,500)"/>--><!--方法1，放置图片-->
+   <!-- <g class="flag">
+    <circle class="cir" cx="100" cy="600" r="10" stroke="#f57518" stroke-width="2" fill="none"></circle>
+        <path class="ti"d="M90,600 L110,600 L130,660,L70,660" style="fill: #f57518; "></path>
+    </g>-->
+
+</svg>
+<p id="title">测试风机图</p>
+<p class="text1">旋转角度(顺0-360°)</p>
+<div id="imgdiaplay">
+    <img src="pic/decrease.png " id="decrease" onclick="decre()" >
+    <img src="pic/increase.png" id="increase" onclick="incre()">
+</div>
+<input type="text" id="angle" value="0" onblur="onBlur()">
+<div class="zoomcontent">
+<p class="text2">调节大小</p>
+<p>宽度（0-50）</p>
+<input id="lon" type="text" value="30" onblur="onBlur()">
+<p>长度（0-300）</p>
+<input id="lat" type="text" value="60" onblur="onBlur()">
+</div>
+
+<script>
+    var svgdoc=document.getElementById("s");
+    svgdoc.addEventListener("dblclick",clickaddFlag,true);
+    svgdoc.oncontextmenu=right;//添加鼠标右击事件
+</script>
+</body>
+</html>
